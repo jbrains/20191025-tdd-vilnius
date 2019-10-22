@@ -6,3 +6,6 @@ build
 
 # Ignore IntelliJ IDEA completely
 .idea
+
+# Ignore jqwik
+.jqwik-database
