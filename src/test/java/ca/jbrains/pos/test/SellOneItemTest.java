@@ -15,6 +15,7 @@ public class SellOneItemTest {
         Assertions.assertEquals("EUR 7.95", display.getText());
     }
 
+    @Test
     void anotherProductFound() throws Exception {
         final Display display = new Display();
         final Sale sale = new Sale(display);
@@ -32,7 +33,10 @@ public class SellOneItemTest {
         }
 
         public void onBarcode(String barcode) {
-            display.setText("EUR 7.95");
+            if ("12345".equals(barcode))
+                display.setText("EUR 7.95");
+            else
+                display.setText("EUR 12.50");
         }
     }
 
