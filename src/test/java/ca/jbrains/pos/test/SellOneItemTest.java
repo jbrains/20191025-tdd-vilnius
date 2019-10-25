@@ -58,12 +58,10 @@ public class SellOneItemTest {
 
     private static class Sale {
         private Display display;
-        private final Map<String, String> pricesByBarcode;
         private final Catalog catalog;
 
         private Sale(Display display, Catalog catalog) {
             this.display = display;
-            this.pricesByBarcode = catalog.getPricesByBarcode();
             this.catalog = catalog;
         }
 

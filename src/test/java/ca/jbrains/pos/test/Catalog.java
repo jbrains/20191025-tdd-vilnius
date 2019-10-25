@@ -9,10 +9,6 @@ public class Catalog {
         this.pricesByBarcode = pricesByBarcode;
     }
 
-    public Map<String, String> getPricesByBarcode() {
-        return pricesByBarcode;
-    }
-
     public String findPrice(String barcode) {
         return pricesByBarcode.get(barcode);
     }
