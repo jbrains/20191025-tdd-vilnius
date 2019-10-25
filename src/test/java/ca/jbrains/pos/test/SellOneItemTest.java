@@ -46,7 +46,7 @@ public class SellOneItemTest {
     }
 
     private static class Sale {
-        private Display display;
+        private final Display display;
         private final HashMap<String, String> pricesByBarcode;
 
         private Sale(Display display, final HashMap<String, String> pricesByBarcode) {
