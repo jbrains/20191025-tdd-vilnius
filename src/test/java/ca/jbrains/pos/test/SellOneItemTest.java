@@ -4,8 +4,6 @@ import io.vavr.collection.HashMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
 public class SellOneItemTest {
 
     @Test
