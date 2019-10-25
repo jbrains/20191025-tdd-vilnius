@@ -68,12 +68,15 @@ public class SellOneItemTest {
         }
 
         public void onBarcode(String barcode) {
-            if ("".equals(barcode))
-                display.setText("Scanning error: empty barcode");
-            else
+            if ("".equals(barcode)) {
+                final String response = "Scanning error: empty barcode";
+                display.setText(response);
+            } else {
+                final String response = pricesByBarcode.get(barcode)
+                        .getOrElse(String.format("Product not found for %s", barcode));
                 display.setText(
-                        pricesByBarcode.get(barcode)
-                                .getOrElse(String.format("Product not found for %s", barcode)));
+                        response);
+            }
         }
     }
 
