@@ -39,17 +39,17 @@ public class SellOneItemTest {
 
     private static class Sale {
         private Display display;
+        private final HashMap<String, String> pricesByBarcode;
 
         private Sale(Display display) {
             this.display = display;
-        }
-
-        public void onBarcode(String barcode) {
-            final HashMap<String, String> pricesByBarcode = HashMap.of(
+            pricesByBarcode = HashMap.of(
                     "12345", "EUR 7.95"
                     , "23456", "EUR 12.50"
             );
+        }
 
+        public void onBarcode(String barcode) {
             display.setText(
                     pricesByBarcode.get(barcode)
                             .getOrElse(String.format("Product not found for %s", barcode)));
