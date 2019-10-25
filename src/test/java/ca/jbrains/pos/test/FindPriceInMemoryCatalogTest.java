@@ -6,30 +6,17 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FindPriceInMemoryCatalogTest {
-    @Test
-    void productFound() throws Exception {
-        final Price matchingPrice = Price.cents(795);
-        Assertions.assertEquals(
-                matchingPrice,
-                catalogWith("12345", matchingPrice).findPrice("12345"));
-    }
+public class FindPriceInMemoryCatalogTest extends FindPriceInCatalogContract {
 
-    private Catalog catalogWith(String barcode, Price matchingPrice) {
+    @Override
+    protected Catalog catalogWith(String barcode, Price matchingPrice) {
         return new InMemoryCatalog(new HashMap<>() {{
             put(barcode, matchingPrice);
         }});
     }
 
-    @Test
-    void productNotFound() throws Exception {
-        Assertions.assertEquals(
-                null,
-                catalogWithout("12345").findPrice("12345")
-        );
-    }
-
-    private Catalog catalogWithout(String barcodeToAvoid) {
+    @Override
+    protected Catalog catalogWithout(String barcodeToAvoid) {
         return new InMemoryCatalog(new HashMap<>() {{
         }});
     }
