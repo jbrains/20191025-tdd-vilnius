@@ -17,6 +17,15 @@ public class FindPriceInMemoryCatalogTest {
                 }}).findPrice("12345"));
     }
 
+    @Test
+    void productNotFound() throws Exception {
+        Assertions.assertEquals(
+                null,
+                new InMemoryCatalog(new HashMap<>() {{
+                }}).findPrice("12345")
+        );
+    }
+
     public static class InMemoryCatalog {
         private final Map<String, Price> pricesByBarcode;
 
