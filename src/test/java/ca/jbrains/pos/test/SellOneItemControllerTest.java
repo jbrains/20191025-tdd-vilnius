@@ -32,10 +32,9 @@ public class SellOneItemControllerTest {
 
     @Test
     void emptyBarcode() throws Exception {
-        final Catalog catalog = Mockito.mock(Catalog.class);
         final Display display = Mockito.mock(Display.class);
 
-        new SellOneItemController(catalog, display).onBarcode("");
+        new SellOneItemController(null, display).onBarcode("");
 
         Mockito.verify(display).displayEmptyBarcodeMessage();
     }
