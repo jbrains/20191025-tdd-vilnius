@@ -51,12 +51,7 @@ public class SellOneItemTest {
             );
 
             final Option<String> maybePrice = pricesByBarcode.get(barcode);
-            String response;
-            if (!maybePrice.isEmpty()) {
-                response = maybePrice.get();
-            } else {
-                response = String.format("Product not found for %s", barcode);
-            }
+            String response = maybePrice.getOrElse(String.format("Product not found for %s", barcode));
             display.setText(response);
         }
     }
