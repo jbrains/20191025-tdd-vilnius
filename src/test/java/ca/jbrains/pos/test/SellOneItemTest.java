@@ -50,9 +50,9 @@ public class SellOneItemTest {
                     .toJavaMap();
 
             if ("12345".equals(barcode))
-                display.setText(pricesByBarcode.get("12345"));
+                display.setText(pricesByBarcode.get(barcode));
             else if ("23456".equals(barcode))
-                display.setText(pricesByBarcode.get("23456"));
+                display.setText(pricesByBarcode.get(barcode));
             else
                 display.setText(String.format("Product not found for %s", barcode));
         }
