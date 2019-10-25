@@ -3,6 +3,8 @@ package ca.jbrains.pos.test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 public class SellOneItemTest {
 
     @Test
@@ -43,8 +45,10 @@ public class SellOneItemTest {
         }
 
         public void onBarcode(String barcode) {
+            final HashMap<String, String> pricesByBarcode = io.vavr.collection.HashMap.of("12345", "EUR 7.95").toJavaMap();
+
             if ("12345".equals(barcode))
-                display.setText("EUR 7.95");
+                display.setText(pricesByBarcode.get("12345"));
             else if ("23456".equals(barcode))
                 display.setText("EUR 12.50");
             else
