@@ -52,7 +52,7 @@ public class SellOneItemTest {
             );
 
             final Option<String> maybePrice = pricesByBarcode.get(barcode);
-            if ("12345".equals(barcode) || "23456".equals(barcode))
+            if (!maybePrice.isEmpty())
                 display.setText(maybePrice.get());
             else
                 display.setText(String.format("Product not found for %s", barcode));
