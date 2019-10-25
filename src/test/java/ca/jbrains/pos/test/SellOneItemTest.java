@@ -43,6 +43,18 @@ public class SellOneItemTest {
         Assertions.assertEquals("Product not found for 99999", display.getText());
     }
 
+    @Test
+    void emptyBarcode() throws Exception {
+        final Display display = new Display();
+        final Sale sale = new Sale(display, io.vavr.collection.HashMap.of(
+                "12345", "EUR 7.95", "23456", "EUR 12.50")
+                .toJavaMap());
+
+        sale.onBarcode("");
+
+        Assertions.assertEquals("Scanning error: empty barcode", display.getText());
+    }
+
     private static class Sale {
         private Display display;
         private final Map<String, String> pricesByBarcode;
@@ -53,6 +65,11 @@ public class SellOneItemTest {
         }
 
         public void onBarcode(String barcode) {
+            if ("".equals(barcode)) {
+                display.setText("Scanning error: empty barcode");
+                return;
+            }
+
             final String price = pricesByBarcode.get(barcode);
             if (price == null) {
                 display.setText(String.format("Product not found for %s", barcode));
