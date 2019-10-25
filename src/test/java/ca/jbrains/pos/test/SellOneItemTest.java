@@ -50,9 +50,9 @@ public class SellOneItemTest {
                     , "23456", "EUR 12.50"
             );
 
-            final Option<String> maybePrice = pricesByBarcode.get(barcode);
-            String response = maybePrice.getOrElse(String.format("Product not found for %s", barcode));
-            display.setText(response);
+            display.setText(
+                    pricesByBarcode.get(barcode)
+                            .getOrElse(String.format("Product not found for %s", barcode)));
         }
     }
 
