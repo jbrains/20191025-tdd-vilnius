@@ -45,12 +45,15 @@ public class SellOneItemTest {
         }
 
         public void onBarcode(String barcode) {
-            final HashMap<String, String> pricesByBarcode = HashMap.of("12345", "EUR 7.95");
+            final HashMap<String, String> pricesByBarcode = HashMap.of(
+                    "12345", "EUR 7.95"
+                    , "23456", "EUR 12.50"
+            );
 
             if ("12345".equals(barcode))
                 display.setText(pricesByBarcode.get("12345").get());
             else if ("23456".equals(barcode))
-                display.setText("EUR 12.50");
+                display.setText(pricesByBarcode.get("23456").get());
             else
                 display.setText(String.format("Product not found for %s", barcode));
         }
