@@ -49,9 +49,7 @@ public class SellOneItemTest {
                     "12345", "EUR 7.95", "23456", "EUR 12.50")
                     .toJavaMap();
 
-            if ("12345".equals(barcode))
-                display.setText(pricesByBarcode.get(barcode));
-            else if ("23456".equals(barcode))
+            if ("12345".equals(barcode) || "23456".equals(barcode))
                 display.setText(pricesByBarcode.get(barcode));
             else
                 display.setText(String.format("Product not found for %s", barcode));
