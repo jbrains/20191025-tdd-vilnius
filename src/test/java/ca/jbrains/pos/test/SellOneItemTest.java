@@ -70,12 +70,16 @@ public class SellOneItemTest {
                 return;
             }
 
-            final String price = pricesByBarcode.get(barcode);
+            final String price = findPrice(barcode);
             if (price == null) {
                 display.displayProductNotFoundMessage(barcode);
             } else {
                 display.displayPrice(price);
             }
+        }
+
+        private String findPrice(String barcode) {
+            return pricesByBarcode.get(barcode);
         }
 
     }
