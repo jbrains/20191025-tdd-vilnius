@@ -2,6 +2,7 @@ package ca.jbrains.pos.test;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.Map;
+import io.vavr.control.Option;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -50,10 +51,9 @@ public class SellOneItemTest {
                     , "23456", "EUR 12.50"
             );
 
-            if ("12345".equals(barcode))
-                display.setText(pricesByBarcode.get(barcode).get());
-            else if ("23456".equals(barcode))
-                display.setText(pricesByBarcode.get(barcode).get());
+            final Option<String> maybePrice = pricesByBarcode.get(barcode);
+            if ("12345".equals(barcode) || "23456".equals(barcode))
+                display.setText(maybePrice.get());
             else
                 display.setText(String.format("Product not found for %s", barcode));
         }
