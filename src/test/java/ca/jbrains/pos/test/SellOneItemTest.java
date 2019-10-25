@@ -7,23 +7,44 @@ public class SellOneItemTest {
 
     @Test
     void productFound() throws Exception {
-        final Sale sale = new Sale();
         final Display display = new Display();
+        final Sale sale = new Sale(display);
 
         sale.onBarcode("12345");
 
         Assertions.assertEquals("EUR 7.95", display.getText());
     }
 
-    private static class Sale {
-        public void onBarcode(String barcode) {
+    void anotherProductFound() throws Exception {
+        final Display display = new Display();
+        final Sale sale = new Sale(display);
 
+        sale.onBarcode("23456");
+
+        Assertions.assertEquals("EUR 12.50", display.getText());
+    }
+
+    private static class Sale {
+        private Display display;
+
+        private Sale(Display display) {
+            this.display = display;
+        }
+
+        public void onBarcode(String barcode) {
+            display.setText("EUR 7.95");
         }
     }
 
     private static class Display {
+        private String text;
+
         public String getText() {
-            return "EUR 7.95";
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
         }
     }
 }
