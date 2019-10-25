@@ -3,6 +3,7 @@ package ca.jbrains.pos.test;
 import net.jqwik.api.*;
 import net.jqwik.api.Tuple.Tuple1;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,12 +36,20 @@ public class CatalogContract {
 
     @Property
     @FromData("catalogFactories")
-    void findTheMatchingPrice(@ForAll CatalogFactory catalogFactory) throws Exception {
+    void matchingPrice(@ForAll CatalogFactory catalogFactory) throws Exception {
         final Price matchingPrice = Price.cents(795);
 
         final Catalog catalog = catalogFactory.catalogWith("12345", matchingPrice);
 
         Assertions.assertEquals(matchingPrice, catalog.findPrice("12345"));
+    }
+
+    @Property
+    @FromData("catalogFactories")
+    void noMatchingPrice(@ForAll CatalogFactory catalogFactory) throws Exception {
+        final Catalog catalog = catalogFactory.catalogWithout("12345");
+
+        Assertions.assertEquals(null, catalog.findPrice("12345"));
     }
 
     public interface CatalogFactory {
