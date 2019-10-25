@@ -1,7 +1,6 @@
 package ca.jbrains.pos.test;
 
 import io.vavr.collection.HashMap;
-import io.vavr.collection.Map;
 import io.vavr.control.Option;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -52,13 +51,13 @@ public class SellOneItemTest {
             );
 
             final Option<String> maybePrice = pricesByBarcode.get(barcode);
+            String response;
             if (!maybePrice.isEmpty()) {
-                final String response = maybePrice.get();
-                display.setText(response);
+                response = maybePrice.get();
             } else {
-                final String response = String.format("Product not found for %s", barcode);
-                display.setText(response);
+                response = String.format("Product not found for %s", barcode);
             }
+            display.setText(response);
         }
     }
 
