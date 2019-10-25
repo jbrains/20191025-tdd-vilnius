@@ -50,10 +50,11 @@ public class SellOneItemTest {
                     .toJavaMap();
 
             final String price = pricesByBarcode.get(barcode);
-            if (price != null) {
-                display.setText(price);
-            } else
+            if (price == null) {
                 display.setText(String.format("Product not found for %s", barcode));
+            } else {
+                display.setText(price);
+            }
         }
     }
 
