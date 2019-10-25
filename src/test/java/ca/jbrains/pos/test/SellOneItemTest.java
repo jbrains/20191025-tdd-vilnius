@@ -4,13 +4,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class SellOneItemTest {
 
     @Test
     void productFound() throws Exception {
         final Display display = new Display();
-        final Sale sale = new Sale(display);
+        final Sale sale = new Sale(display, io.vavr.collection.HashMap.of(
+                "12345", "EUR 7.95", "23456", "EUR 12.50")
+                .toJavaMap());
 
         sale.onBarcode("12345");
 
@@ -20,7 +23,9 @@ public class SellOneItemTest {
     @Test
     void anotherProductFound() throws Exception {
         final Display display = new Display();
-        final Sale sale = new Sale(display);
+        final Sale sale = new Sale(display, io.vavr.collection.HashMap.of(
+                "12345", "EUR 7.95", "23456", "EUR 12.50")
+                .toJavaMap());
 
         sale.onBarcode("23456");
 
@@ -30,7 +35,9 @@ public class SellOneItemTest {
     @Test
     void productNotFound() throws Exception {
         final Display display = new Display();
-        final Sale sale = new Sale(display);
+        final Sale sale = new Sale(display, io.vavr.collection.HashMap.of(
+                "12345", "EUR 7.95", "23456", "EUR 12.50")
+                .toJavaMap());
 
         sale.onBarcode("99999");
 
@@ -39,13 +46,11 @@ public class SellOneItemTest {
 
     private static class Sale {
         private Display display;
-        private final HashMap<String, String> pricesByBarcode;
+        private final Map<String, String> pricesByBarcode;
 
-        private Sale(Display display) {
+        private Sale(Display display, final Map<String, String> pricesByBarcode) {
             this.display = display;
-            pricesByBarcode = io.vavr.collection.HashMap.of(
-                    "12345", "EUR 7.95", "23456", "EUR 12.50")
-                    .toJavaMap();
+            this.pricesByBarcode = pricesByBarcode;
         }
 
         public void onBarcode(String barcode) {
