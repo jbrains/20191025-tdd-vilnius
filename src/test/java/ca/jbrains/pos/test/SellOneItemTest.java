@@ -72,8 +72,8 @@ public class SellOneItemTest {
             if ("".equals(barcode)) {
                 response = "Scanning error: empty barcode";
             } else {
-                response = pricesByBarcode.get(barcode)
-                        .getOrElse(String.format("Product not found for %s", barcode));
+                response = pricesByBarcode.get(barcode).getOrElse(
+                        String.format("Product not found for %s", barcode));
             }
             display.setText(response);
         }
