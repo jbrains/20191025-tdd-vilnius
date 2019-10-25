@@ -39,16 +39,16 @@ public class SellOneItemTest {
 
     private static class Sale {
         private Display display;
+        private final HashMap<String, String> pricesByBarcode;
 
         private Sale(Display display) {
             this.display = display;
+            pricesByBarcode = io.vavr.collection.HashMap.of(
+                    "12345", "EUR 7.95", "23456", "EUR 12.50")
+                    .toJavaMap();
         }
 
         public void onBarcode(String barcode) {
-            final HashMap<String, String> pricesByBarcode = io.vavr.collection.HashMap.of(
-                    "12345", "EUR 7.95", "23456", "EUR 12.50")
-                    .toJavaMap();
-
             final String price = pricesByBarcode.get(barcode);
             if (price == null) {
                 display.setText(String.format("Product not found for %s", barcode));
